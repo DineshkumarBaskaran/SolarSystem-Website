@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Beyond The Moon — A cinematic journey through space." />
+  <title>Beyond The Moon — Journey Through The Universe</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"></div>
+  </div>
+
+  <div class="noise" aria-hidden="true"></div>
+
+  <button class="video-play" id="videoPlay" type="button" data-cursor="hover" title="Auto-scroll full journey in 30 seconds (V)">
+    Play 30s
+  </button>
+
+  <div class="space-bg" id="spaceBg" aria-hidden="true">
+    <canvas class="space-bg__stars" id="starsCanvas"></canvas>
+    <div class="space-bg__nebula space-bg__nebula--1"></div>
+    <div class="space-bg__nebula space-bg__nebula--2"></div>
+    <div class="space-bg__galaxy"></div>
+    <div class="space-bg__clouds" id="cloudsLayer"></div>
+    <div class="space-bg__dust" id="dustLayer"></div>
+    <div class="space-bg__shooting" id="shootingStars"></div>
+  </div>
+
+  <main class="cinema" id="cinema">
+    <div class="cinema__viewport" id="cinemaViewport">
+
+      <!-- ========== CHAPTER 01: HERO ========== -->
+      <div class="layer layer--hero" id="layerHero">
+        <div class="moon-portal" id="moonPortal">
+          <div class="moon-portal__rings" aria-hidden="true">
+            <span class="moon-ring moon-ring--outer"></span>
+            <span class="moon-ring moon-ring--mid"></span>
+            <span class="moon-ring moon-ring--inner"></span>
+            <span class="moon-ring moon-ring--glow"></span>
+          </div>
+          <div class="moon" id="moon">
+            <div class="moon__bloom"></div>
+            <div class="moon__glow"></div>
+            <div class="moon__body">
+              <img class="moon__img" id="moonImg" src="Assests/moon.jpeg" alt="Full Moon" width="600" height="600" fetchpriority="high" />
+              <div class="moon__shade"></div>
+              <div class="moon__crater-overlay"></div>
+              <div class="moon__flare" id="moonFlare"></div>
+            </div>
+          </div>
+        </div>
+        <div class="caption caption--hero" id="heroContent">
+          <p class="caption__chapter">Departure</p>
+          <h1 class="caption__title" data-split>Beyond The Moon</h1>
+          <p class="caption__sub">
+            A cinematic flight through silence, gravity, and light.
+            Enter the ring portal and begin your voyage across the cosmos.
+          </p>
+          <p class="caption__quote">“We are all connected to the Moon by wonder.”</p>
+          <ul class="caption__facts">
+            <li>384,400 km from Earth</li>
+            <li>Age · 4.5 billion years</li>
+            <li>Gravity · 1/6 of Earth</li>
+            <li>Diameter · 3,474 km</li>
+          </ul>
+        </div>
+        <div class="scroll-hint" id="scrollHint">
+          <span class="scroll-hint__text">Scroll to enter · or press V</span>
+          <div class="scroll-hint__mouse"><div class="scroll-hint__wheel"></div></div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 02: MILKY WAY ========== -->
+      <div class="layer layer--surface" id="layerSurface">
+        <div class="enter-portal" id="enterPortal">
+          <div class="enter-portal__world">
+            <div class="milkyway" aria-hidden="true">
+              <div class="milkyway__void"></div>
+              <div class="milkyway__band"></div>
+              <div class="milkyway__core"></div>
+              <div class="milkyway__nebula milkyway__nebula--1"></div>
+              <div class="milkyway__nebula milkyway__nebula--2"></div>
+              <div class="milkyway__stars"></div>
+              <div class="milkyway__dust"></div>
+            </div>
+            <div class="story" id="surfaceStory">
+              <p class="story__chapter">Milky Way</p>
+              <h2 class="story__title">A River of Stars</h2>
+              <p class="story__body">
+                Beyond the portal, the galactic band unfolds —
+                a soft river of light made of a hundred billion suns.
+                Dust lanes carve dark paths through glowing clouds.
+              </p>
+              <p class="story__body story__body--soft">
+                You are inside the Milky Way now.
+                Every spark ahead is a distant sun, older than Earth itself.
+              </p>
+              <div class="story__meta">
+                <span>Galaxy · Milky Way</span>
+                <span>Stars · 100B+</span>
+                <span>Diameter · ~100,000 ly</span>
+                <span>Type · Barred spiral</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 03: LIFTOFF ========== -->
+      <div class="layer layer--liftoff" id="layerLiftoff">
+        <div class="liftoff__nebula"></div>
+        <div class="earth" id="earth">
+          <img class="earth__img" src="Assests/blue shade.jpeg" alt="Earth" loading="lazy" width="500" height="500" />
+          <div class="earth__atmosphere"></div>
+          <p class="float-label float-label--earth">Home · Earth</p>
+        </div>
+        <div class="astronaut" id="astronaut" data-cursor="hover">
+          <img class="astronaut__img" src="Assests/Arronaut.png" alt="Astronaut" loading="lazy" width="320" height="400" />
+          <p class="float-label float-label--crew">Crew · Drift Mode</p>
+        </div>
+        <div class="satellite" id="satellite">
+          <img class="satellite__img" src="Assests/moon2.jpeg" alt="Distant moon" loading="lazy" width="280" height="180" />
+          <p class="float-label float-label--sat">Companion Moon</p>
+        </div>
+        <div class="story story--side" id="liftoffStory">
+          <p class="story__chapter">Liftoff</p>
+          <h2 class="story__title">Leave the Surface</h2>
+          <p class="story__body">
+            Engines quiet. Earth glows like a living jewel below.
+            An astronaut floats between worlds — and silence becomes the soundtrack of ascent.
+          </p>
+          <p class="story__body story__body--soft">
+            From orbit, borders disappear. Oceans shine. Clouds spiral.
+            You see one planet, one crew, one shared sky.
+          </p>
+          <div class="story__meta">
+            <span>Orbit · Low Earth</span>
+            <span>Speed · 7.8 km/s</span>
+            <span>Altitude · ~400 km</span>
+            <span>View · Pale Blue Dot</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 04: GALAXY ========== -->
+      <div class="layer layer--galaxy" id="layerGalaxy">
+        <img class="layer__full layer__full--soft" src="Assests/blue shade.jpeg" alt="" loading="lazy" width="1920" height="1080" />
+        <div class="galaxy__purple"></div>
+        <div class="flyby flyby--mars" id="flybyMars">
+          <img src="Assests/moon2.jpeg" alt="" loading="lazy" class="flyby__img flyby__img--mars" width="200" height="200" />
+          <span class="flyby__tag">Mars · Red Frontier</span>
+        </div>
+        <div class="flyby flyby--jupiter" id="flybyJupiter">
+          <img src="Assests/moon.jpeg" alt="" loading="lazy" class="flyby__img" width="280" height="280" />
+          <span class="flyby__tag">Jupiter · King of Storms</span>
+        </div>
+        <div class="flyby flyby--saturn" id="flybySaturn">
+          <img src="Assests/moon2.jpeg" alt="" loading="lazy" class="flyby__img flyby__img--saturn" width="360" height="240" />
+          <span class="flyby__tag">Distant Moon · Deep Time</span>
+        </div>
+        <div class="story story--center" id="galaxyStory">
+          <p class="story__chapter">Deep Space</p>
+          <h2 class="universe-title" id="universeTitle" aria-label="The Universe Never Ends">
+            <span class="universe-title__letter">T</span><span class="universe-title__letter">h</span><span class="universe-title__letter">e</span>
+            <span class="universe-title__space">&nbsp;</span>
+            <span class="universe-title__letter">U</span><span class="universe-title__letter">n</span><span class="universe-title__letter">i</span><span class="universe-title__letter">v</span><span class="universe-title__letter">e</span><span class="universe-title__letter">r</span><span class="universe-title__letter">s</span><span class="universe-title__letter">e</span>
+            <span class="universe-title__space">&nbsp;</span>
+            <span class="universe-title__letter">N</span><span class="universe-title__letter">e</span><span class="universe-title__letter">v</span><span class="universe-title__letter">e</span><span class="universe-title__letter">r</span>
+            <span class="universe-title__space">&nbsp;</span>
+            <span class="universe-title__letter">E</span><span class="universe-title__letter">n</span><span class="universe-title__letter">d</span><span class="universe-title__letter">s</span>
+          </h2>
+          <p class="story__body story__body--center">
+            Nebulae bloom in violet fire. Worlds rush past the camera like sparks.
+            Billions of stars wait beyond the dark — each one a possible beginning.
+          </p>
+          <p class="story__body story__body--center story__body--soft">
+            You are no longer a visitor. You are the voyage.
+          </p>
+          <div class="story__meta story__meta--center">
+            <span>Milky Way · 100B+ stars</span>
+            <span>Light-years ahead</span>
+            <span>Camera · Free flight</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 05: SOLAR SYSTEM ========== -->
+      <div class="layer layer--solar" id="layerSolar">
+        <div class="story story--top" id="solarStory">
+          <p class="story__chapter">Solar Family</p>
+          <h2 class="story__title">Our Solar System</h2>
+          <p class="story__body">
+            Eight worlds and one blazing star — a family born from the same cosmic cloud.
+            Hover any planet to learn its story, size, and secrets.
+          </p>
+          <div class="story__meta story__meta--center">
+            <span>Age · 4.6 billion years</span>
+            <span>Star · G-type Sun</span>
+            <span>Planets · 8</span>
+          </div>
+        </div>
+        <div class="solar__system" id="solarSystem">
+          <div class="sun" id="sun" data-planet="Sun" data-cursor="hover" data-desc="A G-type star holding 99.8% of the system’s mass. Surface ~5,500°C. The engine of all nearby light and life.">
+            <div class="sun__core"></div>
+            <div class="sun__corona"></div>
+          </div>
+          <div class="orbit orbit--mercury"><div class="planet planet--mercury" data-planet="Mercury" data-cursor="hover" data-desc="Closest to the Sun. Daytime heat above 400°C, nights near −180°C. No real atmosphere. Year lasts only 88 Earth days."></div></div>
+          <div class="orbit orbit--venus"><div class="planet planet--venus" data-planet="Venus" data-cursor="hover" data-desc="Earth’s twin in size — wrapped in toxic CO₂ clouds. Surface pressure 90× Earth’s. Hottest than Mercury despite being farther out."></div></div>
+          <div class="orbit orbit--earth"><div class="planet planet--earth" data-planet="Earth" data-cursor="hover" data-desc="Our pale blue home. Liquid water, breathable air, and the only world known to harbor life. Diameter 12,742 km."></div></div>
+          <div class="orbit orbit--mars"><div class="planet planet--mars" data-planet="Mars" data-cursor="hover" data-desc="The Red Planet. Polar ice, giant volcanoes, and dust storms. A day is ~24.6 hours — a future home for explorers."></div></div>
+          <div class="orbit orbit--jupiter"><div class="planet planet--jupiter" data-planet="Jupiter" data-cursor="hover" data-desc="Largest planet. A gas giant with a Great Red Spot storm larger than Earth. Over 90 known moons."></div></div>
+          <div class="orbit orbit--saturn"><div class="planet planet--saturn" data-planet="Saturn" data-cursor="hover" data-desc="Lord of the rings — ice and rock in breathtaking bands. Density so low it would float in a giant ocean."></div></div>
+          <div class="orbit orbit--uranus"><div class="planet planet--uranus" data-planet="Uranus" data-cursor="hover" data-desc="Ice giant tipped on its side. Seasons last decades. Pale blue from methane in its atmosphere."></div></div>
+          <div class="orbit orbit--neptune"><div class="planet planet--neptune" data-planet="Neptune" data-cursor="hover" data-desc="Farthest giant. Winds over 1,000 mph. Deep azure clouds and the moon Triton in a strange reverse orbit."></div></div>
+        </div>
+        <div class="planet-card" id="planetCard" aria-hidden="true">
+          <h3 class="planet-card__name" id="planetName">Earth</h3>
+          <p class="planet-card__desc" id="planetDesc"></p>
+        </div>
+        <p class="story story--bottom" id="solarHint">Hover a glowing world to unlock its dossier.</p>
+      </div>
+
+      <!-- ========== CHAPTER 06: ASTEROID BELT ========== -->
+      <div class="layer layer--asteroids" id="layerAsteroids">
+        <div class="asteroid-scene" aria-hidden="true">
+          <div class="asteroid-scene__belt" id="asteroidBelt"></div>
+          <div class="asteroid-scene__glow"></div>
+        </div>
+        <div class="story story--center" id="asteroidsStory">
+          <p class="story__chapter">Debris Field</p>
+          <h2 class="story__title">The Asteroid Belt</h2>
+          <p class="story__body story__body--center">
+            Between Mars and Jupiter, leftover stones from the birth of the system drift in silence.
+            Not a wall of rock — a sparse sea of ancient fragments.
+          </p>
+          <p class="story__body story__body--center story__body--soft">
+            Each one is a time capsule from 4.6 billion years ago.
+          </p>
+          <div class="story__meta story__meta--center">
+            <span>Zone · Mars–Jupiter</span>
+            <span>Bodies · Millions</span>
+            <span>Largest · Ceres</span>
+            <span>Origin · Protoplanetary</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 07: NEBULA ========== -->
+      <div class="layer layer--nebula" id="layerNebula">
+        <div class="nebula-scene" aria-hidden="true">
+          <div class="nebula-scene__cloud nebula-scene__cloud--pink"></div>
+          <div class="nebula-scene__cloud nebula-scene__cloud--cyan"></div>
+          <div class="nebula-scene__cloud nebula-scene__cloud--violet"></div>
+          <div class="nebula-scene__stars"></div>
+          <div class="nebula-scene__cluster" id="nebulaCluster"></div>
+        </div>
+        <div class="story story--center" id="nebulaStory">
+          <p class="story__chapter">Star Nursery</p>
+          <h2 class="story__title">Where Stars Are Born</h2>
+          <p class="story__body story__body--center">
+            Inside glowing gas and dust, gravity gathers light into new suns.
+            Pillars of cloud cradle infant stars — blue, fierce, and brand new.
+          </p>
+          <p class="story__body story__body--center story__body--soft">
+            Every star you know began in a place like this.
+            Creation is quiet, patient, and endlessly bright.
+          </p>
+          <div class="story__meta story__meta--center">
+            <span>Nursery · Emission Nebula</span>
+            <span>Fuel · Hydrogen</span>
+            <span>Age · Millions of years</span>
+            <span>Outcome · New suns</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 08: BINARY STARS ========== -->
+      <div class="layer layer--binary" id="layerBinary">
+        <div class="binary-scene" aria-hidden="true">
+          <div class="binary-orbit" id="binaryOrbit">
+            <div class="binary-star binary-star--a" id="binaryStarA"></div>
+            <div class="binary-star binary-star--b" id="binaryStarB"></div>
+          </div>
+          <div class="binary-scene__haze"></div>
+        </div>
+        <div class="story story--center" id="binaryStory">
+          <p class="story__chapter">Twin Suns</p>
+          <h2 class="story__title">A Binary Dance</h2>
+          <p class="story__body story__body--center">
+            Two stars locked in gravity’s waltz — forever circling a shared center.
+            Days would have two dawns. Shadows would split and braid.
+          </p>
+          <p class="story__body story__body--center story__body--soft">
+            Most stars in the galaxy are not alone. Companionship is cosmic.
+          </p>
+          <div class="story__meta story__meta--center">
+            <span>Type · Binary System</span>
+            <span>Orbit · Shared barycenter</span>
+            <span>Common · Majority of stars</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 09: SUPERNOVA ========== -->
+      <div class="layer layer--supernova" id="layerSupernova">
+        <div class="supernova-scene" aria-hidden="true">
+          <div class="supernova__core" id="supernovaCore"></div>
+          <div class="supernova__shock" id="supernovaShock"></div>
+          <div class="supernova__shock supernova__shock--2" id="supernovaShock2"></div>
+          <div class="supernova__rays" id="supernovaRays"></div>
+        </div>
+        <div class="story story--center" id="supernovaStory">
+          <p class="story__chapter">Collapse</p>
+          <h2 class="story__title">Supernova</h2>
+          <p class="story__body story__body--center">
+            A giant star ends in a flash brighter than a galaxy.
+            Elements forged in its heart — iron, gold, oxygen — scatter into space.
+          </p>
+          <p class="story__body story__body--center story__body--soft">
+            The calcium in your bones, the iron in your blood — gifts from ancient explosions.
+          </p>
+          <div class="story__meta story__meta--center">
+            <span>Energy · 10⁴⁴ joules</span>
+            <span>Brief · Weeks of brilliance</span>
+            <span>Legacy · New elements</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 10: BLACK HOLE ========== -->
+      <div class="layer layer--bh" id="layerBh">
+        <div class="bh__warp" id="bhWarp"></div>
+        <div class="bh__disk" id="bhDisk">
+          <div class="bh__ring bh__ring--1"></div>
+          <div class="bh__ring bh__ring--2"></div>
+          <div class="bh__ring bh__ring--3"></div>
+          <div class="bh__core"></div>
+          <div class="bh__photon"></div>
+        </div>
+        <div class="bh__particles" id="bhParticles"></div>
+        <div class="story story--center" id="bhStory">
+          <p class="story__chapter">Event Horizon</p>
+          <h2 class="story__title">Where Light Ends</h2>
+          <p class="story__body story__body--center">
+            Gravity bends space itself. Stars stretch into glowing rings.
+            At the edge of the abyss, time slows — and even light cannot return.
+          </p>
+          <p class="story__body story__body--center story__body--soft">
+            Beyond this line lies the unknown: a singularity where known physics fades.
+          </p>
+          <div class="story__meta story__meta--center">
+            <span>Mass · Millions of Suns</span>
+            <span>Photon Sphere</span>
+            <span>No Escape Velocity</span>
+            <span>Spacetime Warp</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 11: QUASAR ========== -->
+      <div class="layer layer--quasar" id="layerQuasar">
+        <div class="quasar-scene" aria-hidden="true">
+          <div class="quasar__beam quasar__beam--up" id="quasarBeamUp"></div>
+          <div class="quasar__beam quasar__beam--down" id="quasarBeamDown"></div>
+          <div class="quasar__disk" id="quasarDisk"></div>
+          <div class="quasar__core" id="quasarCore"></div>
+        </div>
+        <div class="story story--center" id="quasarStory">
+          <p class="story__chapter">Distant Beacon</p>
+          <h2 class="story__title">Quasar</h2>
+          <p class="story__body story__body--center">
+            A hungry black hole feeds on a swirling disk — and launches jets of light across billions of years.
+            Among the brightest objects in the universe.
+          </p>
+          <p class="story__body story__body--center story__body--soft">
+            Looking at a quasar is looking deep into the early cosmos.
+          </p>
+          <div class="story__meta story__meta--center">
+            <span>Engine · Active galaxy</span>
+            <span>Jets · Near light-speed</span>
+            <span>Distance · Billions of ly</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 12: COMET ========== -->
+      <div class="layer layer--comet" id="layerComet">
+        <div class="comet-scene" aria-hidden="true">
+          <div class="comet-scene__trail" id="cometTrail"></div>
+          <div class="comet" id="cometBody">
+            <div class="comet__nucleus"></div>
+            <div class="comet__coma"></div>
+            <div class="comet__tail comet__tail--ion"></div>
+            <div class="comet__tail comet__tail--dust"></div>
+          </div>
+          <div class="comet-scene__sparks" id="cometSparks"></div>
+        </div>
+        <div class="story story--side" id="cometStory">
+          <p class="story__chapter">Visitor</p>
+          <h2 class="story__title">A Comet Crosses</h2>
+          <p class="story__body">
+            Ice and dust wake as they near the Sun.
+            A glowing coma blooms. Twin tails stream across the dark —
+            one of gas, one of glittering grains.
+          </p>
+          <p class="story__body story__body--soft">
+            Some return every lifetime. Others visit once and vanish forever.
+            Either way, they are messengers from the outer cold.
+          </p>
+          <div class="story__meta">
+            <span>Origin · Oort Cloud</span>
+            <span>Ice · Water + CO₂</span>
+            <span>Tail · Millions of km</span>
+            <span>Speed · Tens of km/s</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 13: EXOPLANET ========== -->
+      <div class="layer layer--exoplanet" id="layerExoplanet">
+        <div class="exo-scene" aria-hidden="true">
+          <div class="exo-scene__star" id="exoStar"></div>
+          <div class="exo-planet" id="exoPlanet">
+            <div class="exo-planet__atmosphere"></div>
+            <div class="exo-planet__surface"></div>
+          </div>
+          <div class="exo-scene__ring" id="exoRing"></div>
+        </div>
+        <div class="story story--side" id="exoplanetStory">
+          <p class="story__chapter">Other Worlds</p>
+          <h2 class="story__title">Exoplanet</h2>
+          <p class="story__body">
+            A world around another sun. Oceans of possibility — or deserts of fire.
+            Thousands confirmed. Trillions waiting in the dark.
+          </p>
+          <p class="story__body story__body--soft">
+            Somewhere, another sky may hold another curious mind looking back.
+          </p>
+          <div class="story__meta">
+            <span>Known · 5,000+</span>
+            <span>Zone · Habitable?</span>
+            <span>Method · Transit &amp; wobble</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 14: AURORA ========== -->
+      <div class="layer layer--aurora" id="layerAurora">
+        <div class="aurora-scene" aria-hidden="true">
+          <div class="aurora-curtain aurora-curtain--1" id="aurora1"></div>
+          <div class="aurora-curtain aurora-curtain--2" id="aurora2"></div>
+          <div class="aurora-curtain aurora-curtain--3" id="aurora3"></div>
+          <div class="aurora-scene__ground"></div>
+        </div>
+        <div class="story story--center" id="auroraStory">
+          <p class="story__chapter">Northern Lights</p>
+          <h2 class="story__title">Aurora</h2>
+          <p class="story__body story__body--center">
+            Solar wind kisses Earth’s magnetic shield.
+            Particles rain into the upper air and paint the night in green and violet fire.
+          </p>
+          <p class="story__body story__body--center story__body--soft">
+            Space weather made visible — a living curtain over the poles.
+          </p>
+          <div class="story__meta story__meta--center">
+            <span>Cause · Solar wind</span>
+            <span>Height · ~100 km</span>
+            <span>Colors · O₂ &amp; N₂</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 15: SKIES ========== -->
+      <div class="layer layer--skies" id="layerSkies">
+        <img
+          class="layer__full skies__bg"
+          src="Assests/blue shade.jpeg"
+          alt="Night skies"
+          loading="lazy"
+          width="1920"
+          height="1080"
+        />
+        <div class="skies__veil"></div>
+        <div class="skies__aurora" aria-hidden="true"></div>
+        <div class="skies__stars-soft" aria-hidden="true"></div>
+
+        <div class="story story--center" id="skiesStory">
+          <p class="story__chapter">Skies</p>
+          <h2 class="story__title">Skies Without Borders</h2>
+          <p class="story__body story__body--center">
+            Above every ocean and desert, the same dark canopy opens.
+            Constellations draw ancient maps. Meteors streak like brief wishes.
+            The night sky is Earth’s oldest window into forever.
+          </p>
+          <p class="story__body story__body--center story__body--soft">
+            Look up — and you are already traveling.
+            Every star you see is a message from deep time.
+          </p>
+          <div class="skies__cards">
+            <article class="skies__card">
+              <h3>Twilight</h3>
+              <p>When day softens into indigo, the first planets appear like quiet lanterns.</p>
+            </article>
+            <article class="skies__card">
+              <h3>Milky Band</h3>
+              <p>Our galaxy arches overhead — a river of light made of a hundred billion suns.</p>
+            </article>
+            <article class="skies__card">
+              <h3>Dawn Return</h3>
+              <p>Morning closes the curtain, but the cosmos never stops — it only waits for night.</p>
+            </article>
+          </div>
+          <div class="story__meta story__meta--center">
+            <span>Visible stars · ~5,000</span>
+            <span>Aurora · Solar wind</span>
+            <span>Sky · Shared by all</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 16: CONSTELLATIONS ========== -->
+      <div class="layer layer--constellations" id="layerConstellations">
+        <div class="constellation-scene" aria-hidden="true">
+          <svg class="constellation-scene__svg" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">
+            <g class="constel constel--orion" id="constelOrion">
+              <line x1="420" y1="180" x2="460" y2="250" />
+              <line x1="460" y1="250" x2="500" y2="180" />
+              <line x1="460" y1="250" x2="455" y2="320" />
+              <line x1="455" y1="320" x2="430" y2="390" />
+              <line x1="455" y1="320" x2="490" y2="390" />
+              <circle cx="420" cy="180" r="4" />
+              <circle cx="500" cy="180" r="4" />
+              <circle cx="460" cy="250" r="3.5" />
+              <circle cx="455" cy="320" r="3.5" />
+              <circle cx="430" cy="390" r="3" />
+              <circle cx="490" cy="390" r="3" />
+            </g>
+            <g class="constel constel--ursa" id="constelUrsa">
+              <line x1="160" y1="140" x2="220" y2="120" />
+              <line x1="220" y1="120" x2="280" y2="130" />
+              <line x1="280" y1="130" x2="330" y2="110" />
+              <line x1="220" y1="120" x2="210" y2="190" />
+              <line x1="280" y1="130" x2="270" y2="200" />
+              <line x1="210" y1="190" x2="270" y2="200" />
+              <circle cx="160" cy="140" r="3" />
+              <circle cx="220" cy="120" r="3.5" />
+              <circle cx="280" cy="130" r="3.5" />
+              <circle cx="330" cy="110" r="3" />
+              <circle cx="210" cy="190" r="3" />
+              <circle cx="270" cy="200" r="3" />
+            </g>
+            <g class="constel constel--scorpion" id="constelScorpius">
+              <line x1="700" y1="280" x2="760" y2="300" />
+              <line x1="760" y1="300" x2="820" y2="340" />
+              <line x1="820" y1="340" x2="860" y2="400" />
+              <line x1="860" y1="400" x2="840" y2="460" />
+              <line x1="700" y1="280" x2="680" y2="220" />
+              <line x1="700" y1="280" x2="720" y2="220" />
+              <circle cx="700" cy="280" r="5" class="constel__bright" />
+              <circle cx="760" cy="300" r="3" />
+              <circle cx="820" cy="340" r="3" />
+              <circle cx="860" cy="400" r="3" />
+              <circle cx="840" cy="460" r="3" />
+              <circle cx="680" cy="220" r="2.5" />
+              <circle cx="720" cy="220" r="2.5" />
+            </g>
+          </svg>
+          <div class="constellation-scene__labels">
+            <span class="constel-label constel-label--orion">Orion · The Hunter</span>
+            <span class="constel-label constel-label--ursa">Ursa Major · Great Bear</span>
+            <span class="constel-label constel-label--scorpion">Scorpius · The Scorpion</span>
+          </div>
+        </div>
+        <div class="story story--center" id="constellationsStory">
+          <p class="story__chapter">Star Maps</p>
+          <h2 class="story__title">Stories Written in Light</h2>
+          <p class="story__body story__body--center">
+            Long before telescopes, humans connected stars into myths and guides.
+            Hunters, bears, and scorpions — maps for sailors, farmers, and dreamers.
+          </p>
+          <p class="story__body story__body--center story__body--soft">
+            The patterns are ours. The stars are older than every story ever told.
+          </p>
+          <div class="story__meta story__meta--center">
+            <span>Official · 88 constellations</span>
+            <span>Guide · Navigation</span>
+            <span>Culture · Shared sky</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 17: PALE BLUE DOT ========== -->
+      <div class="layer layer--paledot" id="layerPaleDot">
+        <div class="paledot-scene" aria-hidden="true">
+          <div class="paledot__field" id="paleDotField"></div>
+          <div class="paledot__earth" id="paleDotEarth"></div>
+          <div class="paledot__beam"></div>
+        </div>
+        <div class="story story--center" id="paleDotStory">
+          <p class="story__chapter">Pale Blue Dot</p>
+          <h2 class="story__title">Home From Afar</h2>
+          <p class="story__body story__body--center">
+            From the outer dark, Earth is a single pixel of light —
+            everyone you love, every story, on that pale blue mote.
+          </p>
+          <p class="story__body story__body--center story__body--soft">
+            “That’s here. That’s home. That’s us.” — Carl Sagan
+          </p>
+          <div class="story__meta story__meta--center">
+            <span>Voyager 1 · 1990</span>
+            <span>Distance · ~6 billion km</span>
+            <span>Lesson · Humility</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHAPTER 18: ENDING ========== -->
+      <div class="layer layer--ending" id="layerEnding">
+        <div class="ending__moon" id="endingMoon">
+          <img src="Assests/moon.jpeg" alt="Rising moon" loading="lazy" width="400" height="400" />
+          <div class="ending__moon-glow"></div>
+        </div>
+        <div class="ending__copy" id="endingCopy">
+          <p class="story__chapter">Return</p>
+          <p class="ending__sub">
+            Eighteen chapters. Endless sky.
+            The cosmos is curiosity — and every night is a new invitation
+            to wonder, to explore, to go beyond the Moon.
+          </p>
+          <ul class="ending__list">
+            <li>You crossed belts of stone and nurseries of light</li>
+            <li>You watched twin suns and dying stars</li>
+            <li>You faced the dark and distant quasars</li>
+            <li>You chased comets and found other worlds</li>
+            <li>You saw aurora, maps, and a pale blue home</li>
+            <li>You looked up — and returned</li>
+          </ul>
+          <p class="ending__note">Thank you for flying Beyond The Moon.</p>
+          <button class="ending__btn" id="exploreAgain" data-cursor="hover" type="button">Explore Again</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Full cinematic scroll distance -->
+    <div class="cinema__track" id="cinemaTrack" aria-hidden="true"></div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
